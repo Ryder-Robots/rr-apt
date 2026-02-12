@@ -1,0 +1,7 @@
+Origin: Ryder Robots
+Label: Ryder Robots
+Codename: noble
+Architectures: arm64 amd64
+Components: main
+Description: Ryder Robots ROS2 Debian Packages
+SignWith: DB675387EA45FE1A919FB2E4C157D946E8C58AE9

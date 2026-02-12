@@ -1,0 +1,7 @@
+{
+    "ROS2.distro": "kilted",
+    "python.autoComplete.extraPaths": [
+        "/home/aaron/ros2_ws/install/rr_interfaces/lib/python3.12/site-packages",
+        "/opt/ros/kilted/lib/python3.12/site-packages"
+    ]
+}

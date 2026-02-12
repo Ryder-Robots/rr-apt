@@ -15,6 +15,12 @@ sudo apt update
 sudo apt install ros-kilted-rr-interfaces
 ```
 
+```
+updating releases
+
+./build-and-publish.sh ~/ros2_ws/src/rr_interfaces
+```
+
 Repository layout highlights:
 
 - `dists/` — distribution metadata and Release files.

@@ -1,3 +1,18 @@
+Package: ros-kilted-rr-common-base
+Version: 0.0.1
+Architecture: arm64
+Depends:  ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rr-interfaces,ros-kilted-ros-base
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Priority: optional
+Section: misc
+Filename: pool/main/r/ros-kilted-rr-common-base/ros-kilted-rr-common-base_0.0.1_arm64.deb
+Size: 15248
+SHA256: e159290be47b6d253d9ca2cb0deafd143fbaae680018acb58af8df48ae412f5f
+SHA1: 00c4296c192408681c633e9508c82c5115009988
+MD5sum: 570b688a2201fb5f75e64ddc5bf7496e
+Description: ROS2 kilted package rr_common_base
+ Auto-generated Debian package for ROS2 package rr_common_base.
+
 Package: ros-kilted-rr-interfaces
 Version: 0.1.2
 Architecture: arm64

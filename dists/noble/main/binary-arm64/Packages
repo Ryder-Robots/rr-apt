@@ -1,0 +1,15 @@
+Package: ros-kilted-rr-interfaces
+Version: 0.1.1
+Architecture: arm64
+Depends: ros-kilted-ros-base
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Priority: optional
+Section: misc
+Filename: pool/main/r/ros-kilted-rr-interfaces/ros-kilted-rr-interfaces_0.1.1_arm64.deb
+Size: 340272
+SHA256: adb10875d052698a6331fe7e6871d75c8e718a04d5cbae1bb7d78cc594f2afdc
+SHA1: ca718e4a49649da278b7ae677128be9acdd6ec17
+MD5sum: 72230e6ec8bfeebc09a26beed667de67
+Description: ROS2 kilted package rr_interfaces
+ Auto-generated Debian package for ROS2 package rr_interfaces.
+

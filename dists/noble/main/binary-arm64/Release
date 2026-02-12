@@ -1,0 +1,5 @@
+Component: main
+Origin: Ryder Robots
+Label: Ryder Robots
+Architecture: arm64
+Description: Ryder Robots ROS2 Debian Packages

@@ -1,0 +1,28 @@
+Origin: Ryder Robots
+Label: Ryder Robots
+Codename: noble
+Date: Thu, 12 Feb 2026 06:16:00 UTC
+Architectures: arm64 amd64
+Components: main
+Description: Ryder Robots ROS2 Debian Packages
+MD5Sum:
+ b21d7a6ea692128c42b978df44437d2f 554 main/binary-arm64/Packages
+ 4fed27bd923f764bca7b896452059f0c 363 main/binary-arm64/Packages.gz
+ 1c094b582d169467fad94fc29fa24c91 124 main/binary-arm64/Release
+ d41d8cd98f00b204e9800998ecf8427e 0 main/binary-amd64/Packages
+ 7029066c27ac6f5ef18d660d5741979a 20 main/binary-amd64/Packages.gz
+ 887597821004174fc8e953d64825ee07 124 main/binary-amd64/Release
+SHA1:
+ f95a6e9b26caf98ea181541aacd914c0578f301c 554 main/binary-arm64/Packages
+ 22f7b36b6c3708b769c41ca4baf9733663a78140 363 main/binary-arm64/Packages.gz
+ dfa51f9118e077746ab97b3f0af573f279c77e27 124 main/binary-arm64/Release
+ da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/binary-amd64/Packages
+ 46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/binary-amd64/Packages.gz
+ 6ae8e43eeb74e72710338e1ccaed53e4633a37d1 124 main/binary-amd64/Release
+SHA256:
+ 48aa2b055c95d1b830ff7ec3d52d4601220b0d238fdae9c1543466645a8b03d5 554 main/binary-arm64/Packages
+ de40be63ee144432fc721374d3d18b9a4c2a684f693426cc4298eb1f4ec8469d 363 main/binary-arm64/Packages.gz
+ 3f091951556001988b99967f4f91861e746679648195a541e0bde94d0058a2de 124 main/binary-arm64/Release
+ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/binary-amd64/Packages
+ 59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/binary-amd64/Packages.gz
+ fa326f6fca8fd82568695d95894aa64729b28793209b7099269bf82e7dd02eb6 124 main/binary-amd64/Release

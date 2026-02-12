@@ -8,8 +8,7 @@ Use the following to add the repository and install the package:
 ```bash
 # One-time setup (if not already done)
 curl -fsSL https:/ryder-robots.github.io/rr-apt/public.gpg | sudo gpg --dearmor -o /usr/share/keyrings/rr-apt.gpg
-echo "deb [signed-by=/usr/share/keyrings/rr-apt.gpg]https:/ryder-robots.github.io/rr-apt noble main" | \
-	sudo tee /etc/apt/sources.list.d/rr-apt.list
+echo "deb [signed-by=/usr/share/keyrings/rr-apt.gpg]https:/ryder-robots.github.io/rr-apt noble main" | sudo tee /etc/apt/sources.list.d/rr-apt.list
 
 # Install
 sudo apt update

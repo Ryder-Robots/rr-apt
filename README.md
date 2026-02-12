@@ -27,4 +27,15 @@ Repository layout highlights:
 - `pool/` — package archives.
 - `public.gpg` — the repository GPG public key.
 
-Replace `youruser` with the GitHub Pages username hosting this repo.
+# Third-Party Packages
+
+### rrpigpio
+
+This package is based on [pigpio](https://github.com/joan2937/pigpio) by Joan (joan2937).
+
+- **Original Author:** Joan (joan2937)
+- **Original License:** Unlicense (Public Domain)
+- **Modifications:** Patched for BCM2711 GPIO sysfs base offset (512) in ISR handling
+
+This is an **unofficial fork** and is not supported by or affiliated with the original author.
+For the official version, see: https://github.com/joan2937/pigpio

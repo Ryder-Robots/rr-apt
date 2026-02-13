@@ -196,9 +196,14 @@ if [ -d "$APT_REPO_PATH" ]; then
     log_info "Adding to apt repository at $APT_REPO_PATH..."
     
     # Check if package already exists and remove it
-    if reprepro -b "$APT_REPO_PATH" list "$UBUNTU_CODENAME" | grep -q "$DEB_NAME"; then
-        log_warn "Removing existing version of $DEB_NAME..."
-        reprepro -b "$APT_REPO_PATH" remove "$UBUNTU_CODENAME" "$DEB_NAME"
+    NEW_VERSION=$(dpkg-deb -f "$DEB_FILE" Version)
+    CURRENT_VERSION=$(reprepro -b "$APT_REPO_PATH" list "$UBUNTU_CODENAME" "$DEB_NAME" 2>/dev/null | awk '{print $3}')
+
+    if [ -n "$CURRENT_VERSION" ]; then
+        if [ "$CURRENT_VERSION" = "$NEW_VERSION" ]; then
+            log_warn "Updating $DEB_NAME: $CURRENT_VERSION -> $NEW_VERSION"
+            reprepro -b "$APT_REPO_PATH" remove "$UBUNTU_CODENAME" "$DEB_NAME"
+        fi
     fi
     
     reprepro -b "$APT_REPO_PATH" includedeb "$UBUNTU_CODENAME" "$DEB_FILE"

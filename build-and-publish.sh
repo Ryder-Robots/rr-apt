@@ -97,6 +97,7 @@ else
     log_info "Creating GitHub release..."
     if ! gh release create "${TAG_NAME}" \
         --title "Release ${VERSION}" \
+	--generate-notes \
         --notes "Release ${VERSION} of ${PACKAGE_NAME}"; then
         log_error "Failed to create GitHub release"
         # Clean up tag if release failed

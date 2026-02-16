@@ -1,60 +1,33 @@
-Package: ros-kilted-rr-common-base
-Version: 1.0.0
+Package: ros-kilted-rr-gpio-pi4b-pigpio-plugin
+Version: 0.0.0
 Architecture: arm64
-Depends:  ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rr-interfaces,ros-kilted-ros-base
+Depends:  ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-action, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-rr-common-base, ros-kilted-rr-interfaces, ros-kilted-rr-motor-controller, ros-kilted-rrpigpio,ros-kilted-ros-base
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
 Priority: optional
 Section: misc
-Filename: pool/main/r/ros-kilted-rr-common-base/ros-kilted-rr-common-base_1.0.0_arm64.deb
-Size: 15256
-SHA256: feff082f3228e251f5df06d5c0db77b01188c069cdcef096f30a614d005db55c
-SHA1: b1b1586849b93467754074bc5947da8342bae393
-MD5sum: 21b865c391db6e57394207ddbd3113d0
-Description: ROS2 kilted package rr_common_base
- Auto-generated Debian package for ROS2 package rr_common_base.
+Filename: pool/main/r/ros-kilted-rr-gpio-pi4b-pigpio-plugin/ros-kilted-rr-gpio-pi4b-pigpio-plugin_0.0.0_arm64.deb
+Size: 35198
+SHA256: e99f2117ad3ea8e8f34191c11127c3a01d34d6882d470d01dcd821e70ec4f587
+SHA1: cd128a6891e5d382b46a0f14d3a4f3650e6e2041
+MD5sum: 6b59cd3023b14e2431807b0d5a5b1093
+Description: ROS2 kilted package rr_gpio_pi4b_pigpio_plugin
+ Auto-generated Debian package for ROS2 package rr_gpio_pi4b_pigpio_plugin.
 
-Package: ros-kilted-rr-common-plugins
-Version: 0.0.1
+Package: rrpigpio
 Architecture: arm64
-Depends:  ros-kilted-lifecycle-msgs, ros-kilted-pluginlib, ros-kilted-protobuf, ros-kilted-rclcpp, ros-kilted-rclcpp-action, ros-kilted-rclcpp-components, ros-kilted-rr-common-base, ros-kilted-rr-interfaces, ros-kilted-udp-msgs,ros-kilted-ros-base
-Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Depends: libc6
 Priority: optional
-Section: misc
-Filename: pool/main/r/ros-kilted-rr-common-plugins/ros-kilted-rr-common-plugins_0.0.1_arm64.deb
-Size: 256888
-SHA256: 6050f306c65cf081650f11d9cbecd8809513845f098bb7ad20c3465737f0edd1
-SHA1: ef4282c8c06a8790ba1522b153f61c38f0fd7fd0
-MD5sum: 1da398a0d62b569b1e253881ab8fa923
-Description: ROS2 kilted package rr_common_plugins
- Auto-generated Debian package for ROS2 package rr_common_plugins.
-
-Package: ros-kilted-rr-interfaces
-Version: 0.1.2
-Architecture: arm64
-Depends: ros-kilted-ros-base
+Section: libs
+Filename: pool/main/r/rrpigpio/rrpigpio_0.71_arm64.deb
+Size: 491710
+SHA256: 78a9037431a68bc8a094c7488f49546999ac0c148e573ef0abb423b77da9ba05
+SHA1: a23ead8492e76d1c286a94acfdd3082aa4604410
+MD5sum: 2e7dc350f9355994cea9f4933a42a022
+Description: pigpio library (Ryder Robots fork)
+  Unofficial fork of pigpio with BCM2711 fixes.
+  Based on pigpio by Joan (joan2937).
+ NOT supported by the original author.
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
-Priority: optional
-Section: misc
-Filename: pool/main/r/ros-kilted-rr-interfaces/ros-kilted-rr-interfaces_0.1.2_arm64.deb
-Size: 334802
-SHA256: 234419c01cc1a14f3f83ba2f59b6ecf39b4ae5c001e3905d61f0a434836a606d
-SHA1: 340e227f9d84d5e4a5fae7b9f30b65010d0cb84b
-MD5sum: ff016517a44e205fc3f920f028ccb7a5
-Description: ROS2 kilted package rr_interfaces
- Auto-generated Debian package for ROS2 package rr_interfaces.
-
-Package: ros-kilted-rr-motor-controller
-Version: 0.0.5
-Architecture: arm64
-Depends:  ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-action, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-rr-common-base, ros-kilted-rr-interfaces,ros-kilted-ros-base
-Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
-Priority: optional
-Section: misc
-Filename: pool/main/r/ros-kilted-rr-motor-controller/ros-kilted-rr-motor-controller_0.0.5_arm64.deb
-Size: 252612
-SHA256: ee509e1c8d288ae6f210a67d5ec14c924100f2c4b9a27128eb541838b98f8f2b
-SHA1: 207587fdc1c79eb8c8679f204f8a5a854d0e284f
-MD5sum: dd9295d04b818469d6cbb56a5c68f48d
-Description: ROS2 kilted package rr_motor_controller
- Auto-generated Debian package for ROS2 package rr_motor_controller.
+Version: 0.71
+Installed-Size: 1897
 

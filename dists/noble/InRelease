@@ -4,35 +4,35 @@ Hash: SHA512
 Origin: Ryder Robots
 Label: Ryder Robots
 Codename: noble
-Date: Tue, 17 Feb 2026 02:03:30 UTC
+Date: Tue, 17 Feb 2026 02:53:58 UTC
 Architectures: arm64 amd64
 Components: main
 Description: Ryder Robots ROS2 Debian Packages
 MD5Sum:
- c07e68d01a72149d232c62ac008e9316 765 main/binary-arm64/Packages
- aec97beb786474abb8182cc02716c875 437 main/binary-arm64/Packages.gz
+ 6f875a5c5b40651e5b5e61cd3e88a6ad 765 main/binary-arm64/Packages
+ d35368e801f2912c53b83ff9b47a766c 436 main/binary-arm64/Packages.gz
  1c094b582d169467fad94fc29fa24c91 124 main/binary-arm64/Release
  d41d8cd98f00b204e9800998ecf8427e 0 main/binary-amd64/Packages
  7029066c27ac6f5ef18d660d5741979a 20 main/binary-amd64/Packages.gz
  887597821004174fc8e953d64825ee07 124 main/binary-amd64/Release
 SHA1:
- 610a98ab0c42ff52133d93d26998734003a03c3f 765 main/binary-arm64/Packages
- 6e07f3c4b51021a66780ccd9df5a40495efbe1d0 437 main/binary-arm64/Packages.gz
+ 76b1619e1168514a2b04974793558a7620fc58c9 765 main/binary-arm64/Packages
+ 455ff7134798371bf81c714e640680148997db74 436 main/binary-arm64/Packages.gz
  dfa51f9118e077746ab97b3f0af573f279c77e27 124 main/binary-arm64/Release
  da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/binary-amd64/Packages
  46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/binary-amd64/Packages.gz
  6ae8e43eeb74e72710338e1ccaed53e4633a37d1 124 main/binary-amd64/Release
 SHA256:
- cb898c029f41be6c0f152ab3b0a2b2112b01ab1442b60e83880f8ed6c46565cf 765 main/binary-arm64/Packages
- 26061aad8d44706bff6904aa44b274905318e4b8fb407c5350882d09209f86fd 437 main/binary-arm64/Packages.gz
+ bc9cb630285da702d30c4e6c96f7b882f439e093bf8c044e1711380331a0e3cd 765 main/binary-arm64/Packages
+ b6907219e795abec482b89d826c8974bdfd21cca0b3eb63e2e0a87b1504c064a 436 main/binary-arm64/Packages.gz
  3f091951556001988b99967f4f91861e746679648195a541e0bde94d0058a2de 124 main/binary-arm64/Release
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/binary-amd64/Packages
  59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/binary-amd64/Packages.gz
  fa326f6fca8fd82568695d95894aa64729b28793209b7099269bf82e7dd02eb6 124 main/binary-amd64/Release
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYKAB0WIQTbZ1OH6kX+GpGfsuTBV9lG6MWK6QUCaZPMcgAKCRDBV9lG6MWK
-6ZWUAP9WZOyefDrb+0T4brCyhYNOfej5HBeWitCyUHl2ZjAWagD7BKGoJJ1vUeCr
-yUvj+sEKx0UKOvnog9+JNxnWt0eKhgo=
-=KP6C
+iHUEARYKAB0WIQTbZ1OH6kX+GpGfsuTBV9lG6MWK6QUCaZPYRgAKCRDBV9lG6MWK
+6WrrAPsHTXUdInJJmd+qWNfqx1IjC7/PpS2OJsaU1pmn0ud5pQD5AZsx7BfUYkIO
+3sW7dwFJkL5iq/wfk2k2kXXtPvo+IwM=
+=BGgJ
 -----END PGP SIGNATURE-----

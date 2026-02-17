@@ -128,6 +128,7 @@ log_info "Building with colcon..."
 source /opt/ros/$ROS_DISTRO/setup.bash
 colcon build \
     --packages-select "$PACKAGE_NAME" \
+    --allow-overriding "$PACKAGE_NAME" \
     --install-base "$INSTALL_DIR" \
     --merge-install \
     --cmake-args -DCMAKE_BUILD_TYPE=Release

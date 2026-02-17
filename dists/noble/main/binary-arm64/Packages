@@ -1,33 +1,30 @@
-Package: ros-kilted-rr-gpio-pi4b-pigpio-plugin
-Version: 0.0.0
+Package: ros-kilted-rr-interfaces
+Version: 0.2.0
 Architecture: arm64
-Depends:  ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-action, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-rr-common-base, ros-kilted-rr-interfaces, ros-kilted-rr-motor-controller, ros-kilted-rrpigpio,ros-kilted-ros-base
+Depends: ros-kilted-ros-base
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
 Priority: optional
 Section: misc
-Filename: pool/main/r/ros-kilted-rr-gpio-pi4b-pigpio-plugin/ros-kilted-rr-gpio-pi4b-pigpio-plugin_0.0.0_arm64.deb
-Size: 35158
-SHA256: b3e50bb0a8756cb337f63454fa57a87cfe2389865f927e7ba61fd97474f87e6c
-SHA1: d17ce4659fe55e0fc3aab412e6f35cd9c47e7023
-MD5sum: f90d10398b0ce3268d81be603f2cc44e
-Description: ROS2 kilted package rr_gpio_pi4b_pigpio_plugin
- Auto-generated Debian package for ROS2 package rr_gpio_pi4b_pigpio_plugin.
+Filename: pool/main/r/ros-kilted-rr-interfaces/ros-kilted-rr-interfaces_0.2.0_arm64.deb
+Size: 334696
+SHA256: 875e360e62e8835fac7694c251bb4b0c4ec4ad3514d78d03ea95b638aaa77a7a
+SHA1: 82486d02866bd11402ee494d697e1581896c6820
+MD5sum: df44999524846eab7a1a140fac051d8e
+Description: ROS2 kilted package rr_interfaces
+ Auto-generated Debian package for ROS2 package rr_interfaces.
 
-Package: rrpigpio
+Package: ros-kilted-rr-motor-controller
+Version: 0.0.11
 Architecture: arm64
-Depends: libc6
-Priority: optional
-Section: libs
-Filename: pool/main/r/rrpigpio/rrpigpio_0.71_arm64.deb
-Size: 491710
-SHA256: 78a9037431a68bc8a094c7488f49546999ac0c148e573ef0abb423b77da9ba05
-SHA1: a23ead8492e76d1c286a94acfdd3082aa4604410
-MD5sum: 2e7dc350f9355994cea9f4933a42a022
-Description: pigpio library (Ryder Robots fork)
-  Unofficial fork of pigpio with BCM2711 fixes.
-  Based on pigpio by Joan (joan2937).
- NOT supported by the original author.
+Depends:  ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-action, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-rr-common-base, ros-kilted-rr-interfaces,ros-kilted-ros-base
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
-Version: 0.71
-Installed-Size: 1897
+Priority: optional
+Section: misc
+Filename: pool/main/r/ros-kilted-rr-motor-controller/ros-kilted-rr-motor-controller_0.0.11_arm64.deb
+Size: 253050
+SHA256: fb70f5d0adf95e9fc6c3c24f07787439924b766514d94be80eee2b3b7e054325
+SHA1: e05ffa4270aeec0c383c41e769af6a494e32cb82
+MD5sum: 7c5061484827fa9dffddf0610f01b83c
+Description: ROS2 kilted package rr_motor_controller
+ Auto-generated Debian package for ROS2 package rr_motor_controller.
 

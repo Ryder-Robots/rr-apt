@@ -1,33 +1,15 @@
-Package: ros-kilted-rr-gpio-pi4b-pigpio-plugin
-Version: 0.0.0
+Package: ros-kilted-rr-motor-controller
+Version: 0.0.7
 Architecture: arm64
-Depends:  ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-action, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-rr-common-base, ros-kilted-rr-interfaces, ros-kilted-rr-motor-controller, ros-kilted-rrpigpio,ros-kilted-ros-base
+Depends:  ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-action, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-rr-common-base, ros-kilted-rr-interfaces,ros-kilted-ros-base
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
 Priority: optional
 Section: misc
-Filename: pool/main/r/ros-kilted-rr-gpio-pi4b-pigpio-plugin/ros-kilted-rr-gpio-pi4b-pigpio-plugin_0.0.0_arm64.deb
-Size: 35198
-SHA256: e99f2117ad3ea8e8f34191c11127c3a01d34d6882d470d01dcd821e70ec4f587
-SHA1: cd128a6891e5d382b46a0f14d3a4f3650e6e2041
-MD5sum: 6b59cd3023b14e2431807b0d5a5b1093
-Description: ROS2 kilted package rr_gpio_pi4b_pigpio_plugin
- Auto-generated Debian package for ROS2 package rr_gpio_pi4b_pigpio_plugin.
-
-Package: rrpigpio
-Architecture: arm64
-Depends: libc6
-Priority: optional
-Section: libs
-Filename: pool/main/r/rrpigpio/rrpigpio_0.71_arm64.deb
-Size: 491710
-SHA256: 78a9037431a68bc8a094c7488f49546999ac0c148e573ef0abb423b77da9ba05
-SHA1: a23ead8492e76d1c286a94acfdd3082aa4604410
-MD5sum: 2e7dc350f9355994cea9f4933a42a022
-Description: pigpio library (Ryder Robots fork)
-  Unofficial fork of pigpio with BCM2711 fixes.
-  Based on pigpio by Joan (joan2937).
- NOT supported by the original author.
-Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
-Version: 0.71
-Installed-Size: 1897
+Filename: pool/main/r/ros-kilted-rr-motor-controller/ros-kilted-rr-motor-controller_0.0.7_arm64.deb
+Size: 252576
+SHA256: 5096488766f9bd3e78b277207084c718f619abc8aaf8eaa935cd5d1fc999b346
+SHA1: 06492a55cc97b94859d6e3abaef9bdaa87daba2d
+MD5sum: 7bb35b9e4811c2a3b2ab11f9b5d5ba4c
+Description: ROS2 kilted package rr_motor_controller
+ Auto-generated Debian package for ROS2 package rr_motor_controller.
 

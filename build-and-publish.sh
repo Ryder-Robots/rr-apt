@@ -201,13 +201,19 @@ if [ -d "$APT_REPO_PATH" ]; then
     NEW_VERSION=$(dpkg-deb -f "$DEB_FILE" Version)
     CURRENT_VERSION=$(reprepro -b "$APT_REPO_PATH" list "$UBUNTU_CODENAME" "$DEB_NAME" 2>/dev/null | awk '{print $3}')
 
-    if [ -n "$CURRENT_VERSION" ]; then
-        if [ "$CURRENT_VERSION" = "$NEW_VERSION" ]; then
-            log_warn "Updating $DEB_NAME: $CURRENT_VERSION -> $NEW_VERSION"
-            reprepro -b "$APT_REPO_PATH" remove "$UBUNTU_CODENAME" "$DEB_NAME"
-        fi
-    fi
-    
+   if [ -n "$CURRENT_VERSION" ]; then
+      if [ "$CURRENT_VERSION" != "$NEW_VERSION" ]; then
+        log_warn "Updating $DEB_NAME: $CURRENT_VERSION -> $NEW_VERSION"
+        # Archive old deb before reprepro removes it
+        mkdir -p "$APT_REPO_PATH/archive/$DEB_NAME"
+        find "$APT_REPO_PATH/pool" -name "${DEB_NAME}_${CURRENT_VERSION}_*.deb" \
+            -exec cp {} "$APT_REPO_PATH/archive/$DEB_NAME/" \;
+        reprepro -b "$APT_REPO_PATH" remove "$UBUNTU_CODENAME" "$DEB_NAME"
+      else
+        log_warn "Version $NEW_VERSION already exists, skipping"
+        exit 0
+      fi
+    fi 
     reprepro -b "$APT_REPO_PATH" includedeb "$UBUNTU_CODENAME" "$DEB_FILE"
     
     log_info "Package added successfully!"

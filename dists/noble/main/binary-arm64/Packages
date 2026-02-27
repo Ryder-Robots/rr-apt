@@ -13,6 +13,21 @@ MD5sum: 58c37c07f625a2cd153353dfc7b471aa
 Description: ROS2 kilted package rr_common_base
  Auto-generated Debian package for ROS2 package rr_common_base.
 
+Package: ros-kilted-rr-gpio-pi4b-pigpio-plugin
+Version: 0.0.0
+Architecture: arm64
+Depends:  ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-action, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-rr-common-base, ros-kilted-rr-interfaces, ros-kilted-rr-motor-controller, ros-kilted-rrpigpio,ros-kilted-ros-base
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Priority: optional
+Section: misc
+Filename: pool/main/r/ros-kilted-rr-gpio-pi4b-pigpio-plugin/ros-kilted-rr-gpio-pi4b-pigpio-plugin_0.0.0_arm64.deb
+Size: 35158
+SHA256: b3e50bb0a8756cb337f63454fa57a87cfe2389865f927e7ba61fd97474f87e6c
+SHA1: d17ce4659fe55e0fc3aab412e6f35cd9c47e7023
+MD5sum: f90d10398b0ce3268d81be603f2cc44e
+Description: ROS2 kilted package rr_gpio_pi4b_pigpio_plugin
+ Auto-generated Debian package for ROS2 package rr_gpio_pi4b_pigpio_plugin.
+
 Package: ros-kilted-rr-interfaces
 Version: 0.2.0
 Architecture: arm64
@@ -57,4 +72,22 @@ SHA1: 96fc826603562715a48d61317a0a222969452154
 MD5sum: 719298b928624e00d51178ec16cf661f
 Description: ROS2 kilted package rr_mousebot_bringup
  Auto-generated Debian package for ROS2 package rr_mousebot_bringup.
+
+Package: rrpigpio
+Architecture: arm64
+Depends: libc6
+Priority: optional
+Section: libs
+Filename: pool/main/r/rrpigpio/rrpigpio_0.71_arm64.deb
+Size: 142224
+SHA256: 05c2c1ca4309154cd1186bea976d51386e0f5fc2c2e65ba85ab8f55244ac278f
+SHA1: 6877eab328cde00c9f6899de00f067e649ab3b55
+MD5sum: b6169bdc4d60bd6b7f6f458c48b48e82
+Description: pigpio library (Ryder Robots fork)
+  Unofficial fork of pigpio with BCM2711 fixes.
+  Based on pigpio by Joan (joan2937).
+ NOT supported by the original author.
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Version: 0.71
+Installed-Size: 546
 

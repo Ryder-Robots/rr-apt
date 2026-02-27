@@ -44,17 +44,17 @@ Description: ROS2 kilted package rr_interfaces
  Auto-generated Debian package for ROS2 package rr_interfaces.
 
 Package: ros-kilted-rr-motor-controller
-Version: 1.0.1
+Version: 1.0.2
 Architecture: arm64
 Depends:  ros-kilted-nav-msgs, ros-kilted-nav2-util, ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-action, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-rr-common-base, ros-kilted-rr-interfaces,ros-kilted-ros-base
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
 Priority: optional
 Section: misc
-Filename: pool/main/r/ros-kilted-rr-motor-controller/ros-kilted-rr-motor-controller_1.0.1_arm64.deb
-Size: 267310
-SHA256: d4477ab581e1c275697407066ba7e5b73fdc99dcfc05009982e41558ee269975
-SHA1: dd3fde491940301ca6dff9a3309d1b6d093f69a0
-MD5sum: 437400e573db9a28e1cbea46a4d597ef
+Filename: pool/main/r/ros-kilted-rr-motor-controller/ros-kilted-rr-motor-controller_1.0.2_arm64.deb
+Size: 268034
+SHA256: 09a57b4705a429bc6c2282d326c2fa9f38e3aefe1b3076c694a429c3c7cd8836
+SHA1: e3a409f91f6cef86a2fe72195ae6b027f3e7d907
+MD5sum: 9d266ca6c87bcb80a6a5cf975037ffd1
 Description: ROS2 kilted package rr_motor_controller
  Auto-generated Debian package for ROS2 package rr_motor_controller.
 

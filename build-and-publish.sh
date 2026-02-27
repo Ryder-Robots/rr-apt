@@ -157,11 +157,16 @@ rm -f "$DEB_ROOT/opt/ros/$ROS_DISTRO/COLCON_IGNORE"
 # Generate dependencies from package.xml
 DEPENDS="ros-${ROS_DISTRO}-ros-base"
 for dep in $(grep -oP '(?<=<depend>)[^<]+' "$PACKAGE_DIR/package.xml"); do
-    dep_deb="ros-${ROS_DISTRO}-$(echo "$dep" | tr '_' '-')"
-    DEPENDS="$DEPENDS, $dep_deb"
-done
-for dep in $(grep -oP '(?<=<exec_depend>)[^<]+' "$PACKAGE_DIR/package.xml"); do
-    dep_deb="ros-${ROS_DISTRO}-$(echo "$dep" | tr '_' '-')"
+    ros_dep="ros-${ROS_DISTRO}-$(echo "$dep" | tr '_' '-')"
+    bare_dep="$(echo "$dep" | tr '_' '-')"
+    if apt-cache show "$ros_dep" > /dev/null 2>&1; then
+        dep_deb="$ros_dep"
+    elif apt-cache show "$bare_dep" > /dev/null 2>&1; then
+        dep_deb="$bare_dep"
+    else
+        log_warn "Dependency $dep not found in apt cache as either $ros_dep or $bare_dep"
+        dep_deb="$ros_dep"
+    fi
     DEPENDS="$DEPENDS, $dep_deb"
 done
 

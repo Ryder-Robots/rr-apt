@@ -59,17 +59,17 @@ Description: ROS2 kilted package rr_motor_controller
  Auto-generated Debian package for ROS2 package rr_motor_controller.
 
 Package: ros-kilted-rr-mousebot-bringup
-Version: 0.0.3
+Version: 0.0.4
 Architecture: arm64
-Depends:  ros-kilted-launch, ros-kilted-nav2-lifecycle-manager, ros-kilted-nav2-util, ros-kilted-rr-gpio-pi4b-pigpio-plugin, ros-kilted-rr-motor-controller,ros-kilted-ros-base
+Depends:  ros-kilted-launch, ros-kilted-nav2-util, ros-kilted-rr-gpio-pi4b-pigpio-plugin, ros-kilted-rr-motor-controller,ros-kilted-ros-base
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
 Priority: optional
 Section: misc
-Filename: pool/main/r/ros-kilted-rr-mousebot-bringup/ros-kilted-rr-mousebot-bringup_0.0.3_arm64.deb
-Size: 7644
-SHA256: 65a7ad5a7a9a190d2f0a7cade06f57411c8193ca70c9fcfdc15d9c515d7aedc1
-SHA1: 96fc826603562715a48d61317a0a222969452154
-MD5sum: 719298b928624e00d51178ec16cf661f
+Filename: pool/main/r/ros-kilted-rr-mousebot-bringup/ros-kilted-rr-mousebot-bringup_0.0.4_arm64.deb
+Size: 7638
+SHA256: 338046b4e63c57164d06b713f69c1d59469b55ff8fb8d93ff07002a29885859e
+SHA1: 9e3f2154688495444b7e42c0af899bc24291a7c2
+MD5sum: 4ecdde56a4cda4445a5eab56810ace48
 Description: ROS2 kilted package rr_mousebot_bringup
  Auto-generated Debian package for ROS2 package rr_mousebot_bringup.
 

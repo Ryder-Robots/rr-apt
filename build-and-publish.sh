@@ -159,9 +159,11 @@ DEPENDS="ros-${ROS_DISTRO}-ros-base"
 for dep in $(grep -oP '(?<=<depend>)[^<]+' "$PACKAGE_DIR/package.xml"); do
     ros_dep="ros-${ROS_DISTRO}-$(echo "$dep" | tr '_' '-')"
     bare_dep="$(echo "$dep" | tr '_' '-')"
-    if apt-cache show "$ros_dep" > /dev/null 2>&1; then
+    if apt-cache policy "$ros_dep" 2>/dev/null | grep -q "Candidate:" && \
+       ! apt-cache policy "$ros_dep" 2>/dev/null | grep -q "Candidate: (none)"; then
         dep_deb="$ros_dep"
-    elif apt-cache show "$bare_dep" > /dev/null 2>&1; then
+    elif apt-cache policy "$bare_dep" 2>/dev/null | grep -q "Candidate:" && \
+       ! apt-cache policy "$bare_dep" 2>/dev/null | grep -q "Candidate: (none)"; then
         dep_deb="$bare_dep"
     else
         log_warn "Dependency $dep not found in apt cache as either $ros_dep or $bare_dep"

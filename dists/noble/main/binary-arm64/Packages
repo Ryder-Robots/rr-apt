@@ -73,6 +73,21 @@ MD5sum: b26ec7b488f3c70d8108a6bfab68ca4f
 Description: ROS2 kilted package rr_mousebot_bringup
  Auto-generated Debian package for ROS2 package rr_mousebot_bringup.
 
+Package: rr-bno055
+Architecture: arm64
+Depends: libc6, libstdc++6
+Priority: optional
+Section: libs
+Filename: pool/main/r/rr-bno055/rr-bno055_0.0.1_arm64.deb
+Size: 98166
+SHA256: af67e5a9ad41895b2c286fd90fedbc5c7cb3dc4589a21ec843f442a67aa0e6e1
+SHA1: 6c419d1cbceca77f9f24e1e0d6a106eaffe73ff4
+MD5sum: 6994d061683fdf56068129856193e63c
+Description: Ryder Robots BNO055 IMU hardware driver
+Maintainer: Ryder Robots <aaron@ryderrobots.com>
+Version: 0.0.1
+Installed-Size: 1115
+
 Package: rrpigpio
 Architecture: arm64
 Depends: libc6

@@ -78,15 +78,15 @@ Architecture: arm64
 Depends: libc6, libstdc++6
 Priority: optional
 Section: libs
-Filename: pool/main/r/rr-bno055/rr-bno055_0.0.1_arm64.deb
-Size: 98166
-SHA256: af67e5a9ad41895b2c286fd90fedbc5c7cb3dc4589a21ec843f442a67aa0e6e1
-SHA1: 6c419d1cbceca77f9f24e1e0d6a106eaffe73ff4
-MD5sum: 6994d061683fdf56068129856193e63c
+Filename: pool/main/r/rr-bno055/rr-bno055_0.0.2_arm64.deb
+Size: 98092
+SHA256: 1b0b62313e6d8c1f6fc98baee9c40acf45c589535b5f6c5de3523bb83a0497a8
+SHA1: 4cf42dc9a2a98b09cb1f5f39851e28f7006450b8
+MD5sum: 1104bf531936d4726187871b5da6ffda
 Description: Ryder Robots BNO055 IMU hardware driver
 Maintainer: Ryder Robots <aaron@ryderrobots.com>
-Version: 0.0.1
-Installed-Size: 1115
+Version: 0.0.2
+Installed-Size: 1111
 
 Package: rrpigpio
 Architecture: arm64

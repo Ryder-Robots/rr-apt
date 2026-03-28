@@ -1,3 +1,18 @@
+Package: ros-kilted-rr-bosch-lc-base
+Version: 0.0.0
+Architecture: arm64
+Depends:  ros-kilted-nav2-util, ros-kilted-rclcpp, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-sensor-msgs, rr-bno055,ros-kilted-ros-base
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Priority: optional
+Section: misc
+Filename: pool/main/r/ros-kilted-rr-bosch-lc-base/ros-kilted-rr-bosch-lc-base_0.0.0_arm64.deb
+Size: 94586
+SHA256: 7105fc1af97b274197e7f1dfc518cc8c1def21786823bfe92a18455f2f525cb0
+SHA1: 2f6b3813f4b2fd9b0bf4f4113490ce78627f188c
+MD5sum: 4dc9a00b18692a8d5972de5142990efd
+Description: ROS2 kilted package rr_bosch_lc_base
+ Auto-generated Debian package for ROS2 package rr_bosch_lc_base.
+
 Package: ros-kilted-rr-common-base
 Version: 1.0.0
 Architecture: arm64

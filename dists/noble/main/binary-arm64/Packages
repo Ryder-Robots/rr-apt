@@ -1,3 +1,33 @@
+Package: ros-kilted-ldlidar-component
+Version: 0.2.0
+Architecture: arm64
+Depends:  ros-kilted-bond, ros-kilted-bondcpp, ros-kilted-diagnostic-msgs, ros-kilted-diagnostic-updater, ros-kilted-nav2-msgs, ros-kilted-nav2-util, ros-kilted-rclcpp, ros-kilted-rclcpp-components, ros-kilted-rclcpp-lifecycle, ros-kilted-sensor-msgs, ros-kilted-std-msgs,ros-kilted-ros-base
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Priority: optional
+Section: misc
+Filename: pool/main/r/ros-kilted-ldlidar-component/ros-kilted-ldlidar-component_0.2.0_arm64.deb
+Size: 127574
+SHA256: 70ff9cfc72cb486a39f61cf9c68fcdecbb8ab756ee40b2d0e21785920a5fde1e
+SHA1: 67baf80ee4124a085cf37ac9165dbd7ca498690e
+MD5sum: 3dc3985d892d5e8b36327c5493c5d867
+Description: ROS2 kilted package ldlidar_component
+ Auto-generated Debian package for ROS2 package ldlidar_component.
+
+Package: ros-kilted-ldlidar-node
+Version: 0.3.0
+Architecture: arm64
+Depends: ros-kilted-ros-base
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Priority: optional
+Section: misc
+Filename: pool/main/r/ros-kilted-ldlidar-node/ros-kilted-ldlidar-node_0.3.0_arm64.deb
+Size: 552360
+SHA256: bf4c4c9b90557805ec2bc280b2997a6c073c4494101fbed1420c2f43f91e025b
+SHA1: 540d4fd355c9b2ac94b73288284330e3cc47c902
+MD5sum: f6c3e20d5d70e8f729fe1152d22bcf26
+Description: ROS2 kilted package ldlidar_node
+ Auto-generated Debian package for ROS2 package ldlidar_node.
+
 Package: ros-kilted-rr-bosch-lc-base
 Version: 0.0.2
 Architecture: arm64

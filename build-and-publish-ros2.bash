@@ -191,6 +191,13 @@ EOF
 log_info "Control file:"
 cat "$DEB_ROOT/DEBIAN/control"
 
+# Copy postinst script if present
+if [ -f "$PACKAGE_DIR/debian/postinst" ]; then
+    log_info "Installing postinst script..."
+    cp "$PACKAGE_DIR/debian/postinst" "$DEB_ROOT/DEBIAN/postinst"
+    chmod 755 "$DEB_ROOT/DEBIAN/postinst"
+fi
+
 # Build the .deb
 DEB_FILE="$BUILD_DIR/${DEB_NAME}_${VERSION}_${ARCH}.deb"
 log_info "Building .deb..."

@@ -3,7 +3,7 @@ set -e
 
 # Configuration
 APT_REPO_PATH="$HOME/ws/rr-apt"
-UBUNTU_CODENAME=$(grep DISTRIB_CODENAME /etc/lsb-release | cut -d= -f2)
+UBUNTU_CODENAME="${UBUNTU_CODENAME:-$(grep DISTRIB_CODENAME /etc/lsb-release | cut -d= -f2)}"
 CMAKE_INSTALL_PREFIX="/usr"
 
 # Colors for output

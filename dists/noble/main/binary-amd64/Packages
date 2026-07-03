@@ -1,15 +1,15 @@
 Package: rr-emod-serde
 Architecture: amd64
-Depends: libeigen3-dev (>= 3.4), libc6 (>= 2.43), libgcc-s1 (>= 4.0), libstdc++6 (>= 14)
+Depends: libeigen3-dev (>= 3.4),  libsodium-dev (>= 1.0.18),  libsodium23 (>= 1.0.18), libc6 (>= 2.43), libgcc-s1 (>= 4.0), libsodium23 (>= 0.6.0), libstdc++6 (>= 14)
 Priority: optional
 Section: libs
-Filename: pool/main/r/rr-emod-serde/rr-emod-serde_0.4.0_amd64.deb
-Size: 6217552
-SHA256: 72cdc1c09764b1cbfee15b7231d87178ee46410096f9b080de660d8518de5432
-SHA1: e62c5707beb25fea89ae378ba3eec28c2d3b59d9
-MD5sum: c88f2d54fde941869919878cb2d66b62
+Filename: pool/main/r/rr-emod-serde/rr-emod-serde_0.5.0_amd64.deb
+Size: 6299022
+SHA256: 0b84c1ba83478402dc7a5f362a93a591e8320ab21c95acb637e7d8d819def31e
+SHA1: cfff470336c10633d4cbc63396e1d207ff45dc89
+MD5sum: 2736420b6edb0306fed26e4ed2e22971
 Description: Ryder Robots eModule serialisation/deserialisation library
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
-Version: 0.4.0
-Installed-Size: 17871
+Version: 0.5.0
+Installed-Size: 18130
 

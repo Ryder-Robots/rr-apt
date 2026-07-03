@@ -1,7 +1,7 @@
 Origin: Ryder Robots
 Label: Ryder Robots
 Codename: noble
-Date: Mon, 22 Jun 2026 12:41:36 UTC
+Date: Fri, 03 Jul 2026 11:40:04 UTC
 Architectures: arm64 amd64
 Components: main
 Description: Ryder Robots ROS2 Debian Packages
@@ -9,20 +9,20 @@ MD5Sum:
  d41d8cd98f00b204e9800998ecf8427e 0 main/binary-arm64/Packages
  7029066c27ac6f5ef18d660d5741979a 20 main/binary-arm64/Packages.gz
  1c094b582d169467fad94fc29fa24c91 124 main/binary-arm64/Release
- de99e43f4720cab3a089a61305c7a9dd 566 main/binary-amd64/Packages
- 43908eed1867389d5cc4b3b50a7bfda9 405 main/binary-amd64/Packages.gz
+ e1cb4cc2316127552a7da631967d54b9 644 main/binary-amd64/Packages
+ fbcec20a39c2f6feb7f0a507aa76f0fc 429 main/binary-amd64/Packages.gz
  887597821004174fc8e953d64825ee07 124 main/binary-amd64/Release
 SHA1:
  da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/binary-arm64/Packages
  46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/binary-arm64/Packages.gz
  dfa51f9118e077746ab97b3f0af573f279c77e27 124 main/binary-arm64/Release
- f07aed45e1fec352c04c833128b454899f8e133d 566 main/binary-amd64/Packages
- 7c9438f40d6972763d7315660bc62f121da62d3d 405 main/binary-amd64/Packages.gz
+ 863d83c411ebf14de670ffbda5a234fe486c7e0e 644 main/binary-amd64/Packages
+ f04d7dd98a14e69c0a633620d321947e02ae0441 429 main/binary-amd64/Packages.gz
  6ae8e43eeb74e72710338e1ccaed53e4633a37d1 124 main/binary-amd64/Release
 SHA256:
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/binary-arm64/Packages
  59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/binary-arm64/Packages.gz
  3f091951556001988b99967f4f91861e746679648195a541e0bde94d0058a2de 124 main/binary-arm64/Release
- 82755af69321b888978678cb07a55e8e74966a4cd704bba56be9c95e29981cb3 566 main/binary-amd64/Packages
- 7a3756d3d9109a7f81ae9b1b7a7732539b45ba249ce4d3977128fc5442cbb957 405 main/binary-amd64/Packages.gz
+ 0411cfee823af109236bd544cf35bc07410e30fef711bab2812648f4a73078ff 644 main/binary-amd64/Packages
+ badfb84f3313900af563b9db317b21e5295f75376befc78644d1e8feab6a802b 429 main/binary-amd64/Packages.gz
  fa326f6fca8fd82568695d95894aa64729b28793209b7099269bf82e7dd02eb6 124 main/binary-amd64/Release

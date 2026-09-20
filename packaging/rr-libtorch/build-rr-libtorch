@@ -201,10 +201,24 @@ License: BSD-3-Clause
  its own stanza below.
 EOF
     for f in $(printf '%s\n' "${!NEED_TEXT[@]}" | sort); do
+        # The short licence name is the one the library is OFFERED under. Where the
+        # text file carries more than that — because upstream bundles third-party
+        # code and ships its notices alongside — the difference is stated rather
+        # than flattened away. "License: MIT" on a file containing three licences
+        # is the kind of tidy summary that is wrong in exactly the way nobody
+        # checks.
         case "$f" in
-          OpenBLAS.LICENSE) lic="BSD-3-Clause"; who="OpenBLAS contributors" ;;
-          ArmComputeLibrary.LICENSE) lic="MIT"; who="Arm Limited and contributors" ;;
-          *) lic="see text"; who="see text" ;;
+          OpenBLAS.LICENSE)
+            lic="BSD-3-Clause"; who="The OpenBLAS Project, and the LAPACK authors"
+            extra=" The same text also carries LAPACK's own licence: OpenBLAS bundles LAPACK
+ and redistributes it under that notice." ;;
+          ArmComputeLibrary.LICENSE)
+            lic="MIT"; who="Arm Limited and contributors"
+            extra=" The same text also carries the Apache-2.0 and BSD-3-Clause notices that
+ upstream ships beside MIT for third-party code vendored into the library, and
+ records the copyright line that upstream's REUSE templates leave as a
+ placeholder." ;;
+          *) lic="see text"; who="see text"; extra="" ;;
         esac
         files=""
         for n in ${NEED_TEXT[$f]}; do
@@ -219,8 +233,11 @@ License: ${lic}
  Full text in /usr/share/doc/rr-libtorch/legal/${f}.
  .
  Vendored in by the wheel build rather than by PyTorch, and named in no notice
- file that arrives with it, so this text is supplied from rr-infra.
+ file that arrives with it, so this text is supplied from rr-apt.
 EOF
+        if [ -n "$extra" ]; then
+            printf ' .\n%s\n' "$extra"
+        fi
     done
     # Named one by one rather than as a fixed sentence: on amd64 nothing vendors
     # libgfortran, and a copyright that claims a dependency the package does not

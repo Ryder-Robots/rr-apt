@@ -153,16 +153,40 @@ resolvable by every process on the box, which is how an unrelated program ends
 up running PyTorch's build of something instead of Debian's. Confining the
 lookup to the one consumer that wants it is the whole point.
 
-## The one change outside this directory
+## The two changes outside this directory
 
-The consumer finds the libraries through RPATH, which lives in
-`rr-emod-serde`'s `CMakeLists.txt`:
+Both live in `rr-emod-serde`'s `CMakeLists.txt`. Without the first, this package
+installs correctly and changes nothing — the three `not found` lines stay.
 
-    set_target_properties(rr_emod_serde PROPERTIES
-        INSTALL_RPATH "/usr/lib/rr-emod/libtorch")
+**Finding the libraries**, set before any target is created so `rr_emod_serde`
+and `rr_cortex` both inherit it:
 
-Without it this package installs correctly and changes nothing — the three
-`not found` lines stay.
+    set(RR_LIBTORCH_PREFIX "/usr/lib/rr-emod/libtorch" CACHE PATH ...)
+    set(CMAKE_INSTALL_RPATH "${RR_LIBTORCH_PREFIX}")
+
+One hop is all it owes. `libtorch.so`, `libc10.so` and `libtorch_cpu.so` each
+carry `RUNPATH=$ORIGIN`, so once loaded out of the prefix they resolve each
+other — and on arm64 the vendored `libopenblas` and `libarm_compute` beside
+them — without further help. The build tree keeps its own generated RPATH, so
+`ctest` still runs against `~/libtorch-build`.
+
+**Depending on the package**, pinned to the exact upstream version built
+against, any Debian revision of it:
+
+    rr-libtorch (>= ${Torch_VERSION}); rr-libtorch (<< ${Torch_VERSION}.0)
+
+`dpkg-shlibdeps` will not discover this, and will not start to once the package
+is installed. Measured both ways: without rr-libtorch present it warns `cannot
+find library libc10.so`; with it present and found through the RPATH it warns
+`cannot extract name and version from library name 'libc10.so'`, because an
+unversioned soname carries no soversion to key a dependency on. Both exit 0 and
+omit the library — which is how `rr-emod-serde` 0.7.0 came to declare no torch
+dependency at all, installing cleanly onto a box that could not load it.
+
+The pin is the same argument in the other direction. Unversioned sonames mean a
+mismatched runtime still satisfies the loader; the mismatch then surfaces as an
+undefined symbol much later, or does not surface and merely computes
+differently. `apt` refusing at install time is the cheapest place to see it.
 
 ## Legal documentation
 

@@ -1,27 +1,27 @@
 Origin: Ryder Robots
 Label: Ryder Robots
 Codename: resolute
-Date: Sun, 20 Sep 2026 07:38:36 UTC
+Date: Sun, 20 Sep 2026 11:55:03 UTC
 Architectures: arm64 amd64
 Components: main
 Description: Ryder Robots ROS2 Debian Packages
 MD5Sum:
- 6fd4c69f9c0912cfc4a890dbd5eafcb0 781 main/binary-arm64/Packages
- fc7b67364d0cfec9df2ce1dcf58228af 480 main/binary-arm64/Packages.gz
+ 48e5fbd9b42d166fddf032465517fdf2 1717 main/binary-arm64/Packages
+ 6dec16264301b3cf0ef48e9ad96e6d0b 893 main/binary-arm64/Packages.gz
  1c094b582d169467fad94fc29fa24c91 124 main/binary-arm64/Release
  0dffed53a587b0d9a20f8b5df7ec6270 675 main/binary-amd64/Packages
  d20f288571b33e7e31446be9f54f7b89 445 main/binary-amd64/Packages.gz
  887597821004174fc8e953d64825ee07 124 main/binary-amd64/Release
 SHA1:
- b15df30e2e7c26fe9a851a71a3f7d0071c3f8a9b 781 main/binary-arm64/Packages
- 23d1bcaed7d8ad672718a2feee776d5207fe00c4 480 main/binary-arm64/Packages.gz
+ fa99db70521f1839e1eabca12f4ffc2bcda248df 1717 main/binary-arm64/Packages
+ ef1f5ea954b9b31fcce4774c460d18730a91eb5b 893 main/binary-arm64/Packages.gz
  dfa51f9118e077746ab97b3f0af573f279c77e27 124 main/binary-arm64/Release
  177d0b1a55715c7d0f62a66b436f8d6f5336f3f8 675 main/binary-amd64/Packages
  c022bce986c8615fc3e402ba1ce712ae9f1984fe 445 main/binary-amd64/Packages.gz
  6ae8e43eeb74e72710338e1ccaed53e4633a37d1 124 main/binary-amd64/Release
 SHA256:
- 96253706da7b70d084d6e8b2db894cb3238eafefa38baef8e42fdd60c220115d 781 main/binary-arm64/Packages
- e181e20d6eba94e936dff2bfaa28f4cf89b08b7f988f5b0050910c09a7bb074e 480 main/binary-arm64/Packages.gz
+ 12f6b628cdd81c1a03ef7b1e9bce8a4192a9bed0222254b15bf62c7efe7ea136 1717 main/binary-arm64/Packages
+ febc3add44614dc7660444c208cd246f007ad4c2959e5bad24f912240d27fceb 893 main/binary-arm64/Packages.gz
  3f091951556001988b99967f4f91861e746679648195a541e0bde94d0058a2de 124 main/binary-arm64/Release
  9f8c4f5d7d8d9cca4ea5f290c56a95752baaf646235d7f7d28832781e8bb9038 675 main/binary-amd64/Packages
  5abdb2945190cb96ea4c23c50cc45cf08fe5ae8c20122ec7c592a8cdf519d9d4 445 main/binary-amd64/Packages.gz

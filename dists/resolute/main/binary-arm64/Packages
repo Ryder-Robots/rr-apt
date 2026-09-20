@@ -1,15 +1,36 @@
 Package: rr-emod-serde
 Architecture: arm64
-Depends: libeigen3-dev (>= 3.4),  libsodium-dev (>= 1.0.18),  libsodium23 (>= 1.0.18), libc6 (>= 2.38), libgcc-s1 (>= 3.0), libgrpc++1.51t64 (>= 1.51.1), libgrpc29t64 (>= 1.51.1), libprotobuf32t64 (>= 3.21.12), libsodium23 (>= 0.6.0), libstdc++6 (>= 12)
+Depends: libeigen3-dev (>= 3.4),  libsodium-dev (>= 1.0.18),  libsodium23 (>= 1.0.18),  rr-libtorch (>= 2.12.1),  rr-libtorch (<< 2.12.1.0), libc6 (>= 2.38), libgcc-s1 (>= 3.0), libgrpc++1.51t64 (>= 1.51.1), libgrpc29t64 (>= 1.51.1), libprotobuf32t64 (>= 3.21.12), libsodium23 (>= 0.6.0), libstdc++6 (>= 12)
 Priority: optional
 Section: libs
-Filename: pool/main/r/rr-emod-serde/rr-emod-serde_0.8.0~test202609201738.gc304506_arm64.deb
-Size: 496620
-SHA256: 865555d2f2e7e44aa707a1dd326287b45272bdfcf1acf454b298a65b460cadda
-SHA1: df21097a31c3dcff102a9f82e5b5599eef7bc528
-MD5sum: 72c5a93392866faf2362ca807a8f7ede
+Filename: pool/main/r/rr-emod-serde/rr-emod-serde_0.8.1_arm64.deb
+Size: 496678
+SHA256: fa3f49a134e7e2c8d515c3c38cb5cec97b8c94a1033e25cba2ac24dcfbdf9bf4
+SHA1: bb23058eeadd0b83ae3e7262efa9e321950c633a
+MD5sum: 8866448ddd316d1ea15534087b5a329b
 Description: Ryder Robots eModule serialisation/deserialisation library
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
-Version: 0.8.0~test202609201738.gc304506
+Version: 0.8.1
 Installed-Size: 1835
+
+Package: rr-libtorch
+Version: 2.12.1-1
+Architecture: arm64
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Installed-Size: 294064
+Depends: libc6 (>= 2.34), libgcc-s1 (>= 4.5), libgfortran5 (>= 8), libgomp1 (>= 6), libstdc++6 (>= 10.2)
+Priority: optional
+Section: libs
+Filename: pool/main/r/rr-libtorch/rr-libtorch_2.12.1-1_arm64.deb
+Size: 44706928
+SHA256: 0df9027c05d07ff16933141d1cf266582b22db95f3e8dbd9214e5186ee96014d
+SHA1: 670caf1f05a8b0f65992d3a46efad55a57f07a8f
+MD5sum: df012a0aabc2ed9c7d39db2e4e97cae3
+Description: PyTorch C++ runtime for the Ryder Robots brain
+ The libtorch shared libraries rr-emod-serde links against, installed to a
+ private prefix (/usr/lib/rr-emod/libtorch) rather than the system library path, so that
+ libraries vendored by the upstream build cannot shadow Debian's own for
+ unrelated processes. Consumers find them through RPATH.
+ .
+ Built wheel-side for arm64 from PyTorch 2.12.1; see PROVENANCE.
 

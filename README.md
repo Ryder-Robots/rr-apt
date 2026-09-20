@@ -26,6 +26,10 @@ Repository layout highlights:
 - `dists/` — distribution metadata and Release files.
 - `pool/` — package archives.
 - `public.gpg` — the repository GPG public key.
+- `packaging/` — build procedures for packages we assemble ourselves, rather
+  than build from our own source. One directory per package, each with a
+  README that is a replicable procedure naming the machine it runs on. See
+  `packaging/rr-libtorch/`.
 
 # Third-Party Packages
 

@@ -1,0 +1,352 @@
+#!/usr/bin/env bash
+# build-rr-libtorch — package the PyTorch C++ runtime rr-emod-serde links against.
+#
+# Runs NATIVELY on the architecture it packages. The arm64 artefact is a wheel
+# unpacked on rr-pi and the amd64 one is a source build on rr-llm; they are not
+# the same bytes and neither can be produced from the other box.
+#
+# Usage: build-rr-libtorch [-s SRC] [-o OUTDIR] [-r REVISION] [-V VERSION] [-n]
+#   -s  libtorch tree     (default: $RR_TORCH_DIR, else ~/libtorch-build)
+#   -o  where to drop the .deb (default: ~/var/rr-deb/<arch>)
+#   -r  package revision  (default: 1)
+#   -V  upstream version  (default: read out of the tree — see below)
+#   -n  dry run — stage and report, build nothing
+#
+# Nothing here is pinned to a torch version. Re-point -s at a newer tree and the
+# package follows: the version comes from the tree, the payload from a DT_NEEDED
+# walk, the dependencies from the target's package database.
+#
+# Publish with rr-apt-add on rr-llm. The payload is ~300 MB and never enters git.
+set -euo pipefail
+
+PREFIX=/usr/lib/rr-emod/libtorch
+HERE="$(cd "$(dirname "$0")" && pwd)"
+
+# The libraries the brain links, as the entry points of the closure walk. What
+# actually gets shipped is derived from these by following DT_NEEDED, so the
+# list does not have to be maintained per architecture.
+ROOTS=(libtorch.so libc10.so libtorch_cpu.so)
+
+# Shipped by Debian, not by us. Both are GPL-3 with the GCC Runtime Library
+# Exception and both arrive vendored in the arm64 wheel; libtorch_cpu.so needs
+# them by their ordinary sonames, so Debian's copies satisfy the link exactly.
+# Copying them here would move a GPL obligation onto us for nothing.
+declare -A DELEGATED=(
+    [libgomp.so.1]=libgomp1
+    [libgfortran.so.5]=libgfortran5
+)
+
+# Vendored libraries whose licence text exists in no artefact we receive.
+# PyTorch's NOTICE does not mention them — measured, zero hits — because the
+# wheel build added them, not PyTorch.
+declare -A VENDORED_LICENCE=(
+    [libopenblas]=OpenBLAS.LICENSE
+    [libarm_compute]=ArmComputeLibrary.LICENSE
+)
+
+SRC="${RR_TORCH_DIR:-$HOME/libtorch-build}"
+OUT=""
+REVISION=1
+UPSTREAM=""
+DRYRUN=0
+
+while getopts "s:o:r:V:nh" opt; do
+    case "$opt" in
+        s) SRC="$OPTARG" ;;
+        o) OUT="$OPTARG" ;;
+        r) REVISION="$OPTARG" ;;
+        V) UPSTREAM="$OPTARG" ;;
+        n) DRYRUN=1 ;;
+        h) grep '^#' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+        *) exit 2 ;;
+    esac
+done
+
+die() { echo "build-rr-libtorch: $*" >&2; exit 1; }
+
+ARCH="$(dpkg --print-architecture)"
+OUT="${OUT:-$HOME/var/rr-deb/$ARCH}"
+LIBDIR="$SRC/lib"
+[ -d "$LIBDIR" ] || die "no lib/ under $SRC — point -s at an unpacked libtorch tree"
+
+# ------------------------------------------------------------------- version
+# Read out of the tree rather than carried as a constant here, so that pointing
+# -s at a newer torch is the whole of the upgrade. CMake's config is the one
+# place both artefacts agree: the wheel's dist-info says "2.12.1+cpu" and the
+# source tree says nothing at all, but both ship this file with the same value.
+TORCH_CMAKE_VERSION="$SRC/share/cmake/Torch/TorchConfigVersion.cmake"
+if [ -z "$UPSTREAM" ]; then
+    [ -r "$TORCH_CMAKE_VERSION" ] \
+        || die "cannot read a version from ${TORCH_CMAKE_VERSION}.
+  That file is how this script learns which torch it is packaging. Either the
+  tree is incomplete, or upstream moved it — pass -V <version> to override."
+    UPSTREAM="$(sed -n 's/^set(PACKAGE_VERSION "\([^"]*\)").*/\1/p' "$TORCH_CMAKE_VERSION")"
+    [ -n "$UPSTREAM" ] \
+        || die "no PACKAGE_VERSION in ${TORCH_CMAKE_VERSION} — pass -V <version>"
+fi
+# A Debian version must start with a digit, and a silent typo in -V would
+# produce a package that installs and sorts wrongly for the rest of its life.
+[[ "$UPSTREAM" =~ ^[0-9][A-Za-z0-9.+~]*$ ]] \
+    || die "upstream version '${UPSTREAM}' is not a usable Debian version"
+
+# ---------------------------------------------------------------- provenance
+# "libtorch 2.12.1" does not say what is inside the file. A source build and a
+# wheel of the same version vendor different libraries and carry their licence
+# texts in different places, so which one this is gets decided here, recorded
+# in the package, and used to find the licence texts.
+if ls "$LIBDIR"/libopenblas-*.so.* >/dev/null 2>&1; then
+    ORIGIN="wheel"
+else
+    ORIGIN="source"
+fi
+
+# --------------------------------------------------------------- the closure
+# Follow DT_NEEDED from the roots, keeping only what this tree actually
+# provides. Anything it does not provide is the system's problem and becomes a
+# dependency rather than a payload.
+declare -A SHIP=()
+queue=("${ROOTS[@]}")
+while [ ${#queue[@]} -gt 0 ]; do
+    name="${queue[0]}"; queue=("${queue[@]:1}")
+    [ -n "${SHIP[$name]:-}" ] && continue
+    [ -e "$LIBDIR/$name" ] || continue
+    [ -n "${DELEGATED[$name]:-}" ] && continue
+    SHIP[$name]=1
+    while read -r dep; do
+        [ -n "$dep" ] && queue+=("$dep")
+    done < <(objdump -p "$LIBDIR/$name" 2>/dev/null | awk '/NEEDED/{print $2}')
+done
+[ ${#SHIP[@]} -gt 0 ] || die "closure walk found nothing — is $LIBDIR a libtorch lib/?"
+
+for root in "${ROOTS[@]}"; do
+    [ -n "${SHIP[$root]:-}" ] || die "$root is missing from $LIBDIR"
+done
+
+# ------------------------------------------------------------------- licences
+# Refuse rather than ship an incomplete copyright file. A copyright with a gap
+# in it still looks like a copyright, and the gap is invisible from then on.
+PT_LICENSE=""; PT_NOTICE=""
+for d in "${RR_TORCH_LICENSE_DIR:-}" "$SRC" "$HOME/code/pytorch" \
+         "$SRC"/../*.dist-info/licenses "$HOME"/torch-venv/lib/python*/site-packages/torch-*.dist-info/licenses; do
+    [ -n "$d" ] && [ -f "$d/LICENSE" ] && [ -f "$d/NOTICE" ] || continue
+    PT_LICENSE="$d/LICENSE"; PT_NOTICE="$d/NOTICE"; break
+done
+[ -n "$PT_LICENSE" ] || die "cannot find PyTorch LICENSE and NOTICE.
+  Looked in the source tree, ~/code/pytorch and the wheel's dist-info/licenses.
+  Set RR_TORCH_LICENSE_DIR to the directory holding both, or see legal/README.md."
+
+# licence file -> every shipped library it covers, so one text can answer for
+# libarm_compute.so and libarm_compute_graph.so without being named twice.
+declare -A NEED_TEXT=()
+for name in $(printf '%s\n' "${!SHIP[@]}" | sort); do
+    for stem in "${!VENDORED_LICENCE[@]}"; do
+        f="${VENDORED_LICENCE[$stem]}"
+        case "$name" in "$stem"*) NEED_TEXT[$f]="${NEED_TEXT[$f]:+${NEED_TEXT[$f]} }$name" ;; esac
+    done
+done
+missing=()
+for f in "${!NEED_TEXT[@]}"; do
+    [ -s "$HERE/legal/$f" ] || missing+=("legal/$f  (covers ${NEED_TEXT[$f]})")
+done
+if [ ${#missing[@]} -gt 0 ]; then
+    printf 'build-rr-libtorch: refusing to build — licence text missing:\n' >&2
+    printf '  %s\n' "${missing[@]}" >&2
+    die "see legal/README.md for where each text comes from"
+fi
+
+# --------------------------------------------------------------------- stage
+VERSION="${UPSTREAM}-${REVISION}"
+STAGE="$(mktemp -d)"
+trap 'rm -rf "$STAGE"' EXIT
+install -d "$STAGE$PREFIX" "$STAGE/usr/share/doc/rr-libtorch/legal" "$STAGE/DEBIAN"
+
+for name in "${!SHIP[@]}"; do
+    install -m 0644 "$LIBDIR/$name" "$STAGE$PREFIX/$name"
+done
+
+# Every soname the shipped libraries need that we did NOT ship. On arm64 this is
+# where libgomp.so.1 and libgfortran.so.5 surface, having been excluded from the
+# payload on purpose. Computed before the documentation is written, because the
+# documentation describes this set and must not describe anything else.
+declare -A EXTERNAL=()
+for name in "${!SHIP[@]}"; do
+    while read -r dep; do
+        [ -n "${SHIP[$dep]:-}" ] || EXTERNAL[$dep]=1
+    done < <(objdump -p "$STAGE$PREFIX/$name" 2>/dev/null | awk '/NEEDED/{print $2}')
+done
+delegated_used=()
+for dep in $(printf '%s\n' "${!EXTERNAL[@]}" | LC_ALL=C sort); do
+    [ -n "${DELEGATED[$dep]:-}" ] && delegated_used+=("$dep")
+done
+
+install -m 0644 "$PT_LICENSE" "$STAGE/usr/share/doc/rr-libtorch/LICENSE"
+install -m 0644 "$PT_NOTICE"  "$STAGE/usr/share/doc/rr-libtorch/NOTICE"
+for f in "${!NEED_TEXT[@]}"; do
+    install -m 0644 "$HERE/legal/$f" "$STAGE/usr/share/doc/rr-libtorch/legal/$f"
+done
+
+{
+    cat <<EOF
+Upstream-Name: libtorch
+Source: https://github.com/pytorch/pytorch (tag v${UPSTREAM})
+
+Files: ${PREFIX}/libtorch.so
+       ${PREFIX}/libc10.so
+       ${PREFIX}/libtorch_cpu.so
+Copyright: PyTorch contributors; see NOTICE in this directory
+License: BSD-3-Clause
+ Full text in /usr/share/doc/rr-libtorch/LICENSE. NOTICE carries the
+ attributions PyTorch itself is required to pass on. It does not describe
+ libraries vendored in by a wheel build; where this package ships any, each has
+ its own stanza below.
+EOF
+    for f in $(printf '%s\n' "${!NEED_TEXT[@]}" | sort); do
+        case "$f" in
+          OpenBLAS.LICENSE) lic="BSD-3-Clause"; who="OpenBLAS contributors" ;;
+          ArmComputeLibrary.LICENSE) lic="MIT"; who="Arm Limited and contributors" ;;
+          *) lic="see text"; who="see text" ;;
+        esac
+        files=""
+        for n in ${NEED_TEXT[$f]}; do
+            files="${files:+$files
+       }${PREFIX}/$n"
+        done
+        cat <<EOF
+
+Files: ${files}
+Copyright: ${who}
+License: ${lic}
+ Full text in /usr/share/doc/rr-libtorch/legal/${f}.
+ .
+ Vendored in by the wheel build rather than by PyTorch, and named in no notice
+ file that arrives with it, so this text is supplied from rr-infra.
+EOF
+    done
+    # Named one by one rather than as a fixed sentence: on amd64 nothing vendors
+    # libgfortran, and a copyright that claims a dependency the package does not
+    # declare is a false statement in the one file nobody re-reads.
+    if [ ${#delegated_used[@]} -gt 0 ]; then
+        echo
+        echo "Comment: the following are GPL-3 with the GCC Runtime Library Exception."
+        echo " This package does NOT ship them. It declares a dependency instead, and"
+        echo " the shipped libraries resolve each by its ordinary soname, so Debian's"
+        echo " copy satisfies the link and the obligation stays where it already was."
+        echo " ."
+        for dep in "${delegated_used[@]}"; do
+            echo "   ${dep} -> ${DELEGATED[$dep]}"
+        done
+    fi
+} > "$STAGE/usr/share/doc/rr-libtorch/copyright"
+
+# ---------------------------------------------------------------- dependencies
+# dpkg-shlibdeps resolves against THIS machine's package database, which is why
+# the package is built on the architecture it targets. -l keeps our own private
+# directory out of the dependency list: the shipped libraries satisfy each other.
+pushd "$STAGE" >/dev/null
+install -d debian && printf 'Source: rr-libtorch\n\nPackage: rr-libtorch\nArchitecture: %s\n' "$ARCH" > debian/control
+shdeps="$(dpkg-shlibdeps -O --ignore-missing-info -l"$STAGE$PREFIX" "$STAGE$PREFIX"/*.so* 2>&1)" \
+    || die "dpkg-shlibdeps failed — Depends cannot be guessed, so nothing is built:
+${shdeps}"
+rm -rf debian
+popd >/dev/null
+DEPS="${shdeps##*shlibs:Depends=}"
+
+# shlibdeps usually names the delegated packages already, so add one only when
+# it is genuinely absent. Comparison is on the package name alone — shlibdeps
+# writes "libgomp1 (>= 4.9)", and matching the whole field would append a
+# second, unversioned copy of a dependency that is already there.
+declare -A HAVE_DEP=()
+IFS=',' read -ra fields <<< "$DEPS"
+for field in "${fields[@]}"; do
+    read -r first _ <<< "$field"
+    [ -n "$first" ] && HAVE_DEP[$first]=1
+done
+# A Depends with no libc6 in it is what a silently-wrong shlibdeps run looks
+# like — it exits 0, and the package then installs cleanly on a box missing the
+# libraries, where the failure resurfaces as the brain not loading.
+[ -n "${HAVE_DEP[libc6]:-}" ] \
+    || die "dpkg-shlibdeps produced a Depends with no libc6 in it: '${DEPS}'
+  Every shared library here needs libc, so that is a failed run that exited 0."
+for dep in "${!EXTERNAL[@]}"; do
+    pkg="${DELEGATED[$dep]:-}"
+    [ -n "$pkg" ] && [ -z "${HAVE_DEP[$pkg]:-}" ] && { DEPS="$DEPS, $pkg"; HAVE_DEP[$pkg]=1; }
+done
+
+# ---------------------------------------------------------------- provenance
+# Written last because it records what was decided, not what was intended: the
+# checksums are of the staged files and the delegation list is the measured
+# closure, so a disagreement between this file and the package is not possible.
+{
+    echo "rr-libtorch ${VERSION} (${ARCH})"
+    echo
+    echo "Upstream:  PyTorch ${UPSTREAM}"
+    echo "Origin:    ${ORIGIN}"
+    case "$ORIGIN" in
+      source) echo "           built from source; paths inside the binaries name the tree used" ;;
+      wheel)  echo "           repackaged from a PyPI torch wheel unpacked at ${SRC}" ;;
+    esac
+    echo "Staged:    $(date -Is) on $(uname -srm)"
+    echo "Source:    ${SRC}"
+    echo
+    echo "Shipped, with the checksum of what went into this package:"
+    for name in $(printf '%s\n' "${!SHIP[@]}" | LC_ALL=C sort); do
+        echo "  $(sha256sum "$STAGE$PREFIX/$name" | cut -d' ' -f1)  $name"
+    done
+    echo
+    echo "Needed but not shipped — resolved from the system:"
+    for dep in $(printf '%s\n' "${!EXTERNAL[@]}" | LC_ALL=C sort); do
+        if [ -n "${DELEGATED[$dep]:-}" ] && [ -e "$LIBDIR/$dep" ]; then
+            echo "  $dep -> ${DELEGATED[$dep]}   (vendored here, excluded from the payload on purpose)"
+        elif [ -n "${DELEGATED[$dep]:-}" ]; then
+            echo "  $dep -> ${DELEGATED[$dep]}"
+        else
+            echo "  $dep"
+        fi
+    done
+    echo
+    echo "Depends: ${DEPS}"
+} > "$STAGE/usr/share/doc/rr-libtorch/PROVENANCE"
+
+SIZE_KB=$(du -sk "$STAGE" | cut -f1)
+cat > "$STAGE/DEBIAN/control" <<EOF
+Package: rr-libtorch
+Version: ${VERSION}
+Architecture: ${ARCH}
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Section: libs
+Priority: optional
+Installed-Size: ${SIZE_KB}
+Depends: ${DEPS}
+Description: PyTorch C++ runtime for the Ryder Robots brain
+ The libtorch shared libraries rr-emod-serde links against, installed to a
+ private prefix (${PREFIX}) rather than the system library path, so that
+ libraries vendored by the upstream build cannot shadow Debian's own for
+ unrelated processes. Consumers find them through RPATH.
+ .
+ Built ${ORIGIN}-side for ${ARCH} from PyTorch ${UPSTREAM}; see PROVENANCE.
+EOF
+
+echo "== rr-libtorch ${VERSION} ${ARCH} (${ORIGIN}) =="
+echo "== prefix:  ${PREFIX} =="
+echo "== ships:   $(printf '%s ' $(printf '%s\n' "${!SHIP[@]}" | sort)) =="
+echo "== depends: ${DEPS} =="
+echo "== size:    $((SIZE_KB / 1024)) MB staged =="
+
+if [ "$DRYRUN" -eq 1 ]; then
+    # The legal documentation is the reason this package exists in the shape it
+    # does, so a dry run shows it rather than reporting that it was written to a
+    # directory it is about to delete.
+    echo
+    echo "---- /usr/share/doc/rr-libtorch/copyright ----"
+    cat "$STAGE/usr/share/doc/rr-libtorch/copyright"
+    echo "---- /usr/share/doc/rr-libtorch/PROVENANCE ----"
+    cat "$STAGE/usr/share/doc/rr-libtorch/PROVENANCE"
+    echo "----"
+    echo "== DRY RUN: nothing built =="
+    exit 0
+fi
+
+install -d "$OUT"
+DEB="$OUT/rr-libtorch_${VERSION}_${ARCH}.deb"
+dpkg-deb --build --root-owner-group "$STAGE" "$DEB"
+echo "== ARTIFACT: $DEB ($(stat -c%s "$DEB") bytes) =="

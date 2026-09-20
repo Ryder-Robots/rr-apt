@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+# rr-apt-add — add already-built .deb files to this apt repository.
+#
+# The half of publishing that stays on the dev box: reprepro's database and the
+# signing key live here and go nowhere else. Building happens wherever the
+# target architecture is native — for arm64 that is the Pi itself (rr-infra's
+# bin/rr-pi-deb) — and only the finished package crosses.
+#
+# Usage: rr-apt-add [-c CODENAME] [-n] <file.deb> [file.deb ...]
+#   -c  target codename (default: resolute)
+#   -n  dry run: say what would change, touch nothing
+#
+# The codename is a property of this repository, not of whatever distribution
+# the machine running this script happens to be. It is a path component in the
+# URL, so it is whatever the consuming sources.list says — and the consumers
+# are developer devices: a production robot receives a golden image and is
+# impressioned, and never speaks to an apt repository at all.
+set -euo pipefail
+
+REPO="$(cd "$(dirname "$0")" && pwd)"
+CODENAME="resolute"
+DRY=0
+
+while getopts "c:nh" opt; do
+    case "$opt" in
+        c) CODENAME="$OPTARG" ;;
+        n) DRY=1 ;;
+        h) grep '^#' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+        *) exit 2 ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+if [ "$#" -eq 0 ]; then
+    grep '^#' "$0" | sed 's/^# \{0,1\}//' >&2
+    exit 2
+fi
+
+run() {
+    if [ "$DRY" -eq 1 ]; then
+        echo "  would run: $*"
+    else
+        "$@"
+    fi
+}
+
+for deb in "$@"; do
+    if [ ! -f "$deb" ]; then
+        echo "rr-apt-add: no such file: $deb" >&2
+        exit 1
+    fi
+
+    name="$(dpkg-deb -f "$deb" Package)"
+    version="$(dpkg-deb -f "$deb" Version)"
+    arch="$(dpkg-deb -f "$deb" Architecture)"
+
+    echo "== ${name} ${version} ${arch} =="
+    echo "   file:     $deb"
+    echo "   depends:  $(dpkg-deb -f "$deb" Depends)"
+
+    # Per-architecture throughout. A bare `reprepro remove` drops every
+    # architecture of the package, so superseding the arm64 build would
+    # silently unpublish amd64 (and the reverse) the moment both exist.
+    current="$(reprepro -b "$REPO" -A "$arch" list "$CODENAME" "$name" 2>/dev/null | awk '{print $3}')"
+
+    if [ -n "$current" ]; then
+        if [ "$current" = "$version" ]; then
+            echo "   SKIP:     ${version} already published for ${arch}"
+            continue
+        fi
+        if dpkg --compare-versions "$version" lt "$current"; then
+            echo "   REFUSE:   ${version} is older than the published ${current} (${arch})" >&2
+            echo "             apt would never offer it; remove ${current} first if this is deliberate." >&2
+            exit 1
+        fi
+        echo "   REPLACE:  ${current} -> ${version} (${arch})"
+        run mkdir -p "$REPO/archive/$name"
+        while IFS= read -r old; do
+            [ -n "$old" ] && run cp "$old" "$REPO/archive/$name/"
+        done < <(find "$REPO/pool" -name "${name}_${current}_${arch}.deb")
+        run reprepro -b "$REPO" -A "$arch" remove "$CODENAME" "$name"
+    else
+        echo "   NEW:      first ${arch} package for ${name} in ${CODENAME}"
+    fi
+
+    run reprepro -b "$REPO" includedeb "$CODENAME" "$deb"
+done
+
+echo
+echo "== ${CODENAME} now holds =="
+reprepro -b "$REPO" list "$CODENAME"
+
+if [ "$DRY" -eq 0 ]; then
+    echo
+    echo "NOT YET PUBLISHED. Pages serves what is committed, so until this is"
+    echo "committed and pushed the repository on the network is unchanged:"
+    echo "  git -C $REPO add -A && git -C $REPO commit && git -C $REPO push"
+    git -C "$REPO" status --short
+fi

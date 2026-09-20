@@ -1,28 +1,28 @@
 Origin: Ryder Robots
 Label: Ryder Robots
 Codename: resolute
-Date: Mon, 31 Aug 2026 05:43:36 UTC
+Date: Sun, 20 Sep 2026 07:38:36 UTC
 Architectures: arm64 amd64
 Components: main
 Description: Ryder Robots ROS2 Debian Packages
 MD5Sum:
- d41d8cd98f00b204e9800998ecf8427e 0 main/binary-arm64/Packages
- 7029066c27ac6f5ef18d660d5741979a 20 main/binary-arm64/Packages.gz
+ 6fd4c69f9c0912cfc4a890dbd5eafcb0 781 main/binary-arm64/Packages
+ fc7b67364d0cfec9df2ce1dcf58228af 480 main/binary-arm64/Packages.gz
  1c094b582d169467fad94fc29fa24c91 124 main/binary-arm64/Release
- d8423170acf52db7512c03881928e116 675 main/binary-amd64/Packages
- 33abee98e66f8fb07729e446e7e832f9 444 main/binary-amd64/Packages.gz
+ 0dffed53a587b0d9a20f8b5df7ec6270 675 main/binary-amd64/Packages
+ d20f288571b33e7e31446be9f54f7b89 445 main/binary-amd64/Packages.gz
  887597821004174fc8e953d64825ee07 124 main/binary-amd64/Release
 SHA1:
- da39a3ee5e6b4b0d3255bfef95601890afd80709 0 main/binary-arm64/Packages
- 46c6643f07aa7f6bfe7118de926b86defc5087c4 20 main/binary-arm64/Packages.gz
+ b15df30e2e7c26fe9a851a71a3f7d0071c3f8a9b 781 main/binary-arm64/Packages
+ 23d1bcaed7d8ad672718a2feee776d5207fe00c4 480 main/binary-arm64/Packages.gz
  dfa51f9118e077746ab97b3f0af573f279c77e27 124 main/binary-arm64/Release
- 83b3414ee3829b4bf1be14f554247505edd18a1b 675 main/binary-amd64/Packages
- adffa1f70602c587cf7c36dd2990ee2fcbfe98a0 444 main/binary-amd64/Packages.gz
+ 177d0b1a55715c7d0f62a66b436f8d6f5336f3f8 675 main/binary-amd64/Packages
+ c022bce986c8615fc3e402ba1ce712ae9f1984fe 445 main/binary-amd64/Packages.gz
  6ae8e43eeb74e72710338e1ccaed53e4633a37d1 124 main/binary-amd64/Release
 SHA256:
- e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/binary-arm64/Packages
- 59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2 20 main/binary-arm64/Packages.gz
+ 96253706da7b70d084d6e8b2db894cb3238eafefa38baef8e42fdd60c220115d 781 main/binary-arm64/Packages
+ e181e20d6eba94e936dff2bfaa28f4cf89b08b7f988f5b0050910c09a7bb074e 480 main/binary-arm64/Packages.gz
  3f091951556001988b99967f4f91861e746679648195a541e0bde94d0058a2de 124 main/binary-arm64/Release
- 34d74e69e071d5749734f894250808b8050bf2834fdbc97d5f14cecde4ce44a0 675 main/binary-amd64/Packages
- 156ef793f29e1b4a874123baf29bf47b380b47c012d8d3666a591e2831dd8441 444 main/binary-amd64/Packages.gz
+ 9f8c4f5d7d8d9cca4ea5f290c56a95752baaf646235d7f7d28832781e8bb9038 675 main/binary-amd64/Packages
+ 5abdb2945190cb96ea4c23c50cc45cf08fe5ae8c20122ec7c592a8cdf519d9d4 445 main/binary-amd64/Packages.gz
  fa326f6fca8fd82568695d95894aa64729b28793209b7099269bf82e7dd02eb6 124 main/binary-amd64/Release

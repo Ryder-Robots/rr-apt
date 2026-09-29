@@ -1,17 +1,17 @@
 Package: rr-emod-serde
 Architecture: arm64
-Depends: libeigen3-dev (>= 3.4),  libsodium-dev (>= 1.0.18),  libsodium23 (>= 1.0.18),  rr-libtorch (>= 2.12.1),  rr-libtorch (<< 2.12.1.0), libc6 (>= 2.38), libgcc-s1 (>= 3.0), libgrpc++1.51t64 (>= 1.51.1), libgrpc29t64 (>= 1.51.1), libprotobuf32t64 (>= 3.21.12), libsodium23 (>= 0.6.0), libstdc++6 (>= 12)
+Depends: adduser,  libeigen3-dev (>= 3.4),  libsodium-dev (>= 1.0.18),  libsodium23 (>= 1.0.18),  rr-libtorch (>= 2.12.1),  rr-libtorch (<< 2.12.1.0), hailort, libc6 (>= 2.38), libgcc-s1 (>= 3.0), libgrpc++1.51t64 (>= 1.51.1), libgrpc29t64 (>= 1.51.1), libprotobuf32t64 (>= 3.21.12), libsodium23 (>= 0.6.0), libstdc++6 (>= 12)
 Priority: optional
 Section: libs
-Filename: pool/main/r/rr-emod-serde/rr-emod-serde_0.8.1_arm64.deb
-Size: 496678
-SHA256: fa3f49a134e7e2c8d515c3c38cb5cec97b8c94a1033e25cba2ac24dcfbdf9bf4
-SHA1: bb23058eeadd0b83ae3e7262efa9e321950c633a
-MD5sum: 8866448ddd316d1ea15534087b5a329b
+Filename: pool/main/r/rr-emod-serde/rr-emod-serde_0.8.2~test202609291528.g47f716a.dirty_arm64.deb
+Size: 579388
+SHA256: 47121808212be8f0b0a380724ca7fa659ac986f9d2efe0d55324f685419c2cf1
+SHA1: d872b08a460e056164d2fd8c97aa54205451add3
+MD5sum: fced6aae7a944095ee1c2dd8dffff164
 Description: Ryder Robots eModule serialisation/deserialisation library
 Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
-Version: 0.8.1
-Installed-Size: 1835
+Version: 0.8.2~test202609291528.g47f716a.dirty
+Installed-Size: 2232
 
 Package: rr-libtorch
 Version: 2.12.1-1

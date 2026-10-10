@@ -1,0 +1,22 @@
+Package: rr-mongodb-server
+Version: 7.0.43-1
+Architecture: arm64
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Installed-Size: 121820
+Depends: libc6 (>= 2.34), libcurl4t64 (>= 7.16.2), libgcc-s1 (>= 4.5), libssl3t64 (>= 3.0.0), libstdc++6 (>= 12), adduser, tzdata
+Provides: mongodb-org-server
+Conflicts: mongodb-org-server, mongodb-server
+Replaces: mongodb-org-server
+Priority: optional
+Section: database
+Filename: pool/main/r/rr-mongodb-server/rr-mongodb-server_7.0.43-1_arm64.deb
+Size: 31628010
+SHA256: bb83d959ca86720d25f547096f0b4d81cceb90fe091035df4c44ab512620a382
+SHA1: 6de47f435115df326326f9f0891114724f40445c
+MD5sum: f7d4fd9b2b9ab1bceaf479098c6c4ad9
+Description: MongoDB 7.0.43 server built for ARMv8.0-A (Raspberry Pi 4)
+ Upstream mongod from tag r7.0.43, compiled with -march=armv8-a and
+ outline atomics so that it runs on the Pi 4's Cortex-A72, which every
+ upstream arm64 build since 4.4.19 refuses. Loopback-only by default; it
+ exists to back the Omada controller on rr-omr. See PROVENANCE.
+

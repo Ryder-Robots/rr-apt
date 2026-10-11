@@ -1,28 +1,28 @@
 Origin: Ryder Robots
 Label: Ryder Robots
 Codename: noble
-Date: Sat, 10 Oct 2026 10:45:14 UTC
+Date: Sun, 11 Oct 2026 10:21:16 UTC
 Architectures: arm64 amd64
 Components: main
 Description: Ryder Robots ROS2 Debian Packages
 MD5Sum:
- 33dbc90339d7a2c53e53e84541e2aabf 1011 main/binary-arm64/Packages
- daa66155fdade02f79ce9f92e1583e18 659 main/binary-arm64/Packages.gz
+ f18fbf056fa42a5a34bc526515d77dc6 2063 main/binary-arm64/Packages
+ d5267711784902a3a860be2f08683e93 1110 main/binary-arm64/Packages.gz
  1c094b582d169467fad94fc29fa24c91 124 main/binary-arm64/Release
- e1cb4cc2316127552a7da631967d54b9 644 main/binary-amd64/Packages
- fbcec20a39c2f6feb7f0a507aa76f0fc 429 main/binary-amd64/Packages.gz
+ 4104735d142835f5931cf31574836319 1696 main/binary-amd64/Packages
+ 0c99014e9eabc6e647c9d6f64212fc7b 924 main/binary-amd64/Packages.gz
  887597821004174fc8e953d64825ee07 124 main/binary-amd64/Release
 SHA1:
- cae2bb7f68d31ac8c16dcb62c5e05c3016fabff9 1011 main/binary-arm64/Packages
- 7f348ee01229cd5045747a5fd5120ffd1090189c 659 main/binary-arm64/Packages.gz
+ 2088581d187c1d230877f8231a4cf5186de6475e 2063 main/binary-arm64/Packages
+ 91ebc74cc75f37b431136f8dd5c1ce3b0fc18c82 1110 main/binary-arm64/Packages.gz
  dfa51f9118e077746ab97b3f0af573f279c77e27 124 main/binary-arm64/Release
- 863d83c411ebf14de670ffbda5a234fe486c7e0e 644 main/binary-amd64/Packages
- f04d7dd98a14e69c0a633620d321947e02ae0441 429 main/binary-amd64/Packages.gz
+ 56eb3652f409b90d2f1d664ed333f8b0165b19ea 1696 main/binary-amd64/Packages
+ e7e23b0f2a31dc426b573abe6c24d1635d27c726 924 main/binary-amd64/Packages.gz
  6ae8e43eeb74e72710338e1ccaed53e4633a37d1 124 main/binary-amd64/Release
 SHA256:
- cdde5fccc40ea9c6c9fe99bee33cebda50b411d8ad46054f850c81bc62afad6b 1011 main/binary-arm64/Packages
- 09940f129003eaa8ed8558281fe079dd881e91a326e0f7b8df0511b8b5d2672f 659 main/binary-arm64/Packages.gz
+ 2c35aa70d42fa2f838a774cc0cdd33bc99c1431cd368f952a9c6c769383ecebc 2063 main/binary-arm64/Packages
+ 22be7d6b7c519ba8963ec5c9f93d9e483f7aae6a1b47cdc2360dca37bc03c881 1110 main/binary-arm64/Packages.gz
  3f091951556001988b99967f4f91861e746679648195a541e0bde94d0058a2de 124 main/binary-arm64/Release
- 0411cfee823af109236bd544cf35bc07410e30fef711bab2812648f4a73078ff 644 main/binary-amd64/Packages
- badfb84f3313900af563b9db317b21e5295f75376befc78644d1e8feab6a802b 429 main/binary-amd64/Packages.gz
+ de0801300f74ad517b6a6f8fa57db7ca6170bf36992315c248a053b677a2d6a2 1696 main/binary-amd64/Packages
+ 506092cf52c0b175a729a2310abf5fc91e512c50fa2e063a68288e397a2909f4 924 main/binary-amd64/Packages.gz
  fa326f6fca8fd82568695d95894aa64729b28793209b7099269bf82e7dd02eb6 124 main/binary-amd64/Release

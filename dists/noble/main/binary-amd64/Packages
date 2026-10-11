@@ -13,3 +13,25 @@ Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
 Version: 0.5.0
 Installed-Size: 18130
 
+Package: rr-omada-controller
+Version: 6.3.0.45-1
+Architecture: all
+Maintainer: Aaron Spiteri <azzmosphere@gmail.com>
+Installed-Size: 40
+Depends: rr-mongodb-server, docker.io, docker-compose-v2, adduser, curl, iproute2
+Homepage: https://github.com/Ryder-Robots/rr-infra
+Priority: optional
+Section: net
+Filename: pool/main/r/rr-omada-controller/rr-omada-controller_6.3.0.45-1_all.deb
+Size: 11020
+SHA256: c8407f1b55af505521b57fb4b324dc22200668c740e8f28a42615fe169ea2903
+SHA1: 2bfed883e3b3551d5e3bf089cdbb9d0fa2364204
+MD5sum: c5899c5b1470fd106017215fb5d7cadd
+Description: Omada controller host: compose stack, unit, host values
+ The TP-Link Omada software controller as a docker compose stack on a
+ Raspberry Pi 4 (rr-omr), with its MongoDB outside the container
+ (rr-mongodb-server). Ships the stack definition, a oneshot unit whose start
+ and reload are 'compose up -d', and /etc/default/rr-omada for the host's data
+ paths and uid. An upgrade reloads the unit and recreates the container only
+ when the rendered config changed. Carries no credentials.
+
